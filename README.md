@@ -94,6 +94,33 @@ The repository is structured as follows:
 - [Setting up VertexAI](docs/VertexAI.md)
 - [Setting up RAG with ChromaDB](docs/RAG_Assistant.md)
 
+### Chinese LLM Providers
+
+This toolkit now supports popular Chinese LLM providers:
+
+**Alibaba (通义千问)**
+```bash
+ALIBABA_API_KEY=your_alibaba_api_key
+# Optional: ALIBABA_BASE_URL (defaults to https://dashscope.aliyuncs.com/compatible-mode/v1)
+```
+
+**Volcano Engine (火山引擎)**
+```bash
+VOLCANO_API_KEY=your_volcano_api_key
+# Optional: VOLCANO_BASE_URL (defaults to https://ark.cn-beijing.volces.com/api/v3)
+```
+
+**SiliconFlow (硅基流动)**
+```bash
+SILICONFLOW_API_KEY=your_siliconflow_api_key
+# Optional: SILICONFLOW_BASE_URL (defaults to https://api.siliconflow.cn/v1)
+```
+
+Available models include:
+- **Alibaba**: qwen-turbo, qwen-plus, qwen-max, qwen-max-2025-04-28, qwen-vl-plus, qwen-vl-max
+- **Volcano**: doubao-lite-4k, doubao-pro-4k, doubao-pro-32k, doubao-pro-128k
+- **SiliconFlow**: deepseek-ai/DeepSeek-V3, deepseek-ai/DeepSeek-R1, Qwen/Qwen2.5-32B-Instruct, Qwen/Qwen2.5-72B-Instruct, Qwen/Qwen3-8B, meta-llama/Llama-3.3-70B-Instruct
+
 ### Building or customizing your own agent
 
 To customize the agent for your own use case:

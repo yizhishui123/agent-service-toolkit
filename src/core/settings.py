@@ -15,6 +15,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 from schema.models import (
     AllModelEnum,
+    AlibabaModelName,
     AnthropicModelName,
     AWSModelName,
     AzureOpenAIModelName,
@@ -27,7 +28,9 @@ from schema.models import (
     OpenAIModelName,
     OpenRouterModelName,
     Provider,
+    SiliconFlowModelName,
     VertexAIModelName,
+    VolcanoModelName,
 )
 
 
@@ -68,6 +71,16 @@ class Settings(BaseSettings):
     OLLAMA_BASE_URL: str | None = None
     USE_FAKE_MODEL: bool = False
     OPENROUTER_API_KEY: str | None = None
+
+    # Chinese LLM Providers
+    ALIBABA_API_KEY: SecretStr | None = None
+    ALIBABA_BASE_URL: str = "https://dashscope.aliyuncs.com/compatible-mode/v1"
+    
+    VOLCANO_API_KEY: SecretStr | None = None
+    VOLCANO_BASE_URL: str = "https://ark.cn-beijing.volces.com/api/v3"
+    
+    SILICONFLOW_API_KEY: SecretStr | None = None
+    SILICONFLOW_BASE_URL: str = "https://api.siliconflow.cn/v1"
 
     # If DEFAULT_MODEL is None, it will be set in model_post_init
     DEFAULT_MODEL: AllModelEnum | None = None  # type: ignore[assignment]
@@ -197,6 +210,18 @@ class Settings(BaseSettings):
                         raise ValueError("AZURE_OPENAI_ENDPOINT must be set")
                     if not self.AZURE_OPENAI_DEPLOYMENT_MAP:
                         raise ValueError("AZURE_OPENAI_DEPLOYMENT_MAP must be set")
+                case Provider.ALIBABA:
+                    if self.DEFAULT_MODEL is None:
+                        self.DEFAULT_MODEL = AlibabaModelName.QWEN_MAX
+                    self.AVAILABLE_MODELS.update(set(AlibabaModelName))
+                case Provider.VOLCANO:
+                    if self.DEFAULT_MODEL is None:
+                        self.DEFAULT_MODEL = VolcanoModelName.DOUBAO_PRO_4K
+                    self.AVAILABLE_MODELS.update(set(VolcanoModelName))
+                case Provider.SILICONFLOW:
+                    if self.DEFAULT_MODEL is None:
+                        self.DEFAULT_MODEL = SiliconFlowModelName.DEEPSEEK_V3
+                    self.AVAILABLE_MODELS.update(set(SiliconFlowModelName))
 
                     # Parse deployment map if it's a string
                     if isinstance(self.AZURE_OPENAI_DEPLOYMENT_MAP, str):

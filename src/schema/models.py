@@ -15,6 +15,9 @@ class Provider(StrEnum):
     OLLAMA = auto()
     OPENROUTER = auto()
     FAKE = auto()
+    ALIBABA = auto()
+    VOLCANO = auto()
+    SILICONFLOW = auto()
 
 
 class OpenAIModelName(StrEnum):
@@ -105,6 +108,37 @@ class FakeModelName(StrEnum):
     FAKE = "fake"
 
 
+class AlibabaModelName(StrEnum):
+    """https://help.aliyun.com/zh/model-studio/getting-started/models"""
+
+    QWEN_TURBO = "qwen-turbo"
+    QWEN_PLUS = "qwen-plus"
+    QWEN_MAX = "qwen-max"
+    QWEN_MAX_2025 = "qwen-max-2025-04-28"
+    QWEN_VL_PLUS = "qwen-vl-plus"
+    QWEN_VL_MAX = "qwen-vl-max"
+
+
+class VolcanoModelName(StrEnum):
+    """https://www.volcengine.com/docs/82379"""
+
+    DOUBAO_LITE_4K = "doubao-lite-4k"
+    DOUBAO_PRO_4K = "doubao-pro-4k"
+    DOUBAO_PRO_32K = "doubao-pro-32k"
+    DOUBAO_PRO_128K = "doubao-pro-128k"
+
+
+class SiliconFlowModelName(StrEnum):
+    """https://docs.siliconflow.cn/quickstart"""
+
+    DEEPSEEK_V3 = "deepseek-ai/DeepSeek-V3"
+    DEEPSEEK_R1 = "deepseek-ai/DeepSeek-R1"
+    QWEN_32B = "Qwen/Qwen2.5-32B-Instruct"
+    QWEN_72B = "Qwen/Qwen2.5-72B-Instruct"
+    QWEN_3_8B = "Qwen/Qwen3-8B"
+    LLAMA_3_3_70B = "meta-llama/Llama-3.3-70B-Instruct"
+
+
 AllModelEnum: TypeAlias = (
     OpenAIModelName
     | OpenAICompatibleName
@@ -118,4 +152,7 @@ AllModelEnum: TypeAlias = (
     | OllamaModelName
     | OpenRouterModelName
     | FakeModelName
+    | AlibabaModelName
+    | VolcanoModelName
+    | SiliconFlowModelName
 )
